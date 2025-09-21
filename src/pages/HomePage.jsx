@@ -28,7 +28,7 @@ useEffect(() => {
 
             try {
                 setWeatherLoading(true);
-                const response = await fetch('http://localhost:8000/api/weather', {
+                const response = await fetch('/.netlify/functions/getWeather', {
                     headers: {
                         'x-auth-token': token, // Send the token for authentication
                     },
