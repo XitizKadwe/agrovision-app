@@ -51,7 +51,7 @@ function KrishiLogPage() {
 
         const newLogData = { date, crop, activityType, activity, expense, yieldAmount };
         try {
-            const response = await fetch(/.netlify/functions/addLog', {
+            const response = await fetch('/.netlify/functions/addLog', {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json', 
