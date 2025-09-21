@@ -19,7 +19,7 @@ function GeminiChatPage() {
 
     try {
          const currentLanguage = i18n.language;
-      const response = await fetch('http://localhost:8000/gemini', {
+      const response = await fetch('/.netlify/functions/gemini', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt, language: currentLanguage }),
