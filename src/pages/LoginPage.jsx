@@ -1,30 +1,34 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext'; // Import our custom auth hook
+import { useAuth } from '../context/AuthContext';
 
 function LoginPage() {
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
-    const { login } = useAuth(); // Get the login function from our context
+    const { login } = useAuth();
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:8000/api/auth/login', {
+            // ✅ CORRECTED URL FOR NETLIFY FUNCTIONS
+            const response = await fetch('/.netlify/functions/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ phone, password }),
             });
+
             const data = await response.json();
+
             if (response.ok) {
-                login(data.user, data.token); // Use context to set user and token
-                navigate('/'); // Redirect to homepage on successful login
+                login(data.user, data.token); // Set user and token
+                navigate('/'); // Redirect to homepage
             } else {
                 alert(data.msg || 'Login failed.');
             }
         } catch (error) {
             console.error('Login error:', error);
+            alert('An error occurred. Please check the console.');
         }
     };
 
@@ -42,4 +46,5 @@ function LoginPage() {
         </div>
     );
 }
+
 export default LoginPage;
