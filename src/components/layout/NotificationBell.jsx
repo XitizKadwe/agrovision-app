@@ -13,7 +13,7 @@ function NotificationBell() {
     useEffect(() => {
         const fetchUnreadCount = async () => {
             try {
-                const res = await fetch('/api/notifications/unread-count', {
+                const res = await fetch('/.netlify/functions/getUnreadCount', {
                     headers: { 'x-auth-token': token }
                 });
                 const data = await res.json();
@@ -31,7 +31,7 @@ function NotificationBell() {
     const togglePanel = async () => {
         if (!isOpen) {
             try {
-                const res = await fetch('/api/notifications?limit=5', { // Assuming your API supports a limit
+                const res = await fetch('/.netlify/functions/getRecentNotifications', { // Assuming your API supports a limit
                     headers: { 'x-auth-token': token }
                 });
                 const data = await res.json();
