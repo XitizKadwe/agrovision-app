@@ -12,18 +12,25 @@ function SignupPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:8000/api/auth/register', {
+            // ✅ CORRECTED URL FOR NETLIFY FUNCTIONS
+            const response = await fetch('/.netlify/functions/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, phone, password, district }),
             });
+
+            const data = await response.json(); // Always try to parse JSON
+
             if (response.ok) {
+                alert('Registration successful! Please log in.');
                 navigate('/login'); // Redirect to login after successful signup
             } else {
-                alert('Registration failed. Phone number may already be in use.');
+                // Use the message from the server if available
+                alert(data.msg || 'Registration failed. Phone number may already be in use.');
             }
         } catch (error) {
             console.error('Signup error:', error);
+            alert('An error occurred. Please try again.');
         }
     };
 
@@ -45,4 +52,5 @@ function SignupPage() {
         </div>
     );
 }
+
 export default SignupPage;
