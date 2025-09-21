@@ -90,7 +90,7 @@ function KrishiLogPage() {
             }
             
             // If the server deletion is successful, update the UI state
-            const updatedLogs = logs.filter(log => log.id !== idToDelete);
+            const updatedLogs = logs.filter(log => log._id !== idToDelete);
             setLogs(updatedLogs);
 
         } catch (error) {
@@ -208,7 +208,7 @@ function KrishiLogPage() {
                                 <div className="text-right flex-shrink-0">
                                     {log.expense > 0 && <p className="font-bold text-red-500">₹{log.expense.toLocaleString('en-IN')}</p>}
                                     {log.yield > 0 && <p className="font-bold text-green-600">{log.yield} क्विंटल उपज</p>}
-                                    <button onClick={() => handleDelete(log.id)} className="p-2 text-gray-400 rounded-full hover:bg-red-50 hover:text-red-500 mt-1">
+                                    <button onClick={() => handleDelete(log._id)} className="p-2 text-gray-400 rounded-full hover:bg-red-50 hover:text-red-500 mt-1">
                                         <Trash2 size={18} />
                                     </button>
                                 </div>
