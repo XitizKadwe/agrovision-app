@@ -21,7 +21,7 @@ function WeatherDetailsPage() {
             try {
                 // We start by setting loading to true
                 setIsLoading(true);
-                const response = await fetch('http://localhost:8000/weather-details');
+                const response = await fetch('/.netlify/functions/getWeatherDetails');
                 if (!response.ok) { throw new Error("Backend request failed"); }
                 const data = await response.json();
                 setDetails(data);
