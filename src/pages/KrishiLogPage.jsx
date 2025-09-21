@@ -26,7 +26,7 @@ function KrishiLogPage() {
     useEffect(() => {
         const getLogs = async () => {
             try {
-                const response = await fetch('http://localhost:8000/api/logs', {
+                const response = await fetch('/.netlify/functions/getLogs', {
                     headers: { 'x-auth-token': token }
                 });
                 if (!response.ok) {
@@ -51,7 +51,7 @@ function KrishiLogPage() {
 
         const newLogData = { date, crop, activityType, activity, expense, yieldAmount };
         try {
-            const response = await fetch('http://localhost:8000/api/logs', {
+            const response = await fetch(/.netlify/functions/addLog', {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json', 
@@ -80,7 +80,7 @@ function KrishiLogPage() {
     // Function to delete a log entry from the backend and state
     const handleDelete = async (idToDelete) => {
         try {
-            const response = await fetch(`http://localhost:8000/api/logs/${idToDelete}`, {
+            const response = await fetch(`/.netlify/functions/deleteLog?id=${idToDelete}`, {
                 method: 'DELETE',
                 headers: { 'x-auth-token': token },
             });
@@ -106,7 +106,7 @@ function KrishiLogPage() {
         }
         try {
             setIsAnalyzing(true);
-            const response = await fetch('http://localhost:8000/analyze-logs', {
+            const response = await fetch('/.netlify/functions/analyzeLogs', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ logs }),
