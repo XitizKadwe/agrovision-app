@@ -36,7 +36,7 @@ function MandiDetailsPage() {
             if (!selectedMarket) return;
             try {
                 setIsLoading(true);
-                const response = await fetch(`/.netlify/functions/getMandiDetails?district=${district}&market=${market}`);
+                const response = await fetch(`/.netlify/functions/getMandiDetails?district=${selectedDistrict}&market=${selectedMarket}`);
                 const data = await response.json();
                 const sortedData = data.sort((a, b) => a.commodity.localeCompare(b.commodity));
                 setPrices(sortedData);
