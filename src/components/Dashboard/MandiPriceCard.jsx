@@ -12,7 +12,7 @@ function MandiPriceCard() {
     const getData = async () => {
       try {
         setLoading(true);
-        const response = await fetch('http://localhost:8000/mandi-prices');
+        const response = await fetch('/.netlify/functions/getMandiPrices');
         const data = await response.json();
         setMandiData(data);
       } catch (error) {
